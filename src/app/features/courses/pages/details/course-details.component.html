@@ -1,0 +1,62 @@
+<section class="course-details">
+  <header class="course-details__header">
+    <p-button
+      label="Back to Courses"
+      icon="pi pi-arrow-left"
+      severity="secondary"
+      [outlined]="true"
+      routerLink="/courses"
+    />
+    @if (course(); as c) {
+      <p-button label="Edit Course" icon="pi pi-pencil" [routerLink]="['/courses', 'edit', c.id]" />
+    }
+  </header>
+
+  <app-page-state
+    [loading]="loading()"
+    [error]="error()"
+    [empty]="notFound()"
+    [emptyMessage]="emptyMessage()"
+    (retry)="retry()"
+  >
+    @if (course(); as c) {
+      <p-card>
+        <ng-template #header>
+          <div class="course-details__title-bar">
+            <div class="course-details__title-group">
+              <h1 class="course-details__title">{{ c.courseName }}</h1>
+              <p class="course-details__instructor">
+                <i class="pi pi-user"></i>
+                {{ c.instructorName }}
+              </p>
+            </div>
+            <app-status-tag [status]="c.status" />
+          </div>
+        </ng-template>
+
+        <dl class="course-details__grid">
+          <div class="course-details__item">
+            <dt>Category</dt>
+            <dd>{{ c.category }}</dd>
+          </div>
+          <div class="course-details__item">
+            <dt>Duration</dt>
+            <dd>{{ c.duration }} hours</dd>
+          </div>
+          <div class="course-details__item">
+            <dt>Price</dt>
+            <dd>{{ c.price | currency: 'USD' : 'symbol' : '1.0-0' }}</dd>
+          </div>
+          <div class="course-details__item">
+            <dt>Created Date</dt>
+            <dd>{{ c.createdDate | date: 'mediumDate' }}</dd>
+          </div>
+          <div class="course-details__item course-details__item--full">
+            <dt>Description</dt>
+            <dd>{{ c.description || 'No description provided.' }}</dd>
+          </div>
+        </dl>
+      </p-card>
+    }
+  </app-page-state>
+</section>

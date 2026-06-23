@@ -1,0 +1,135 @@
+<section class="course-list">
+  <header class="course-list__header">
+    <div class="course-list__heading">
+      <h1 class="course-list__title">Courses</h1>
+      <p class="course-list__subtitle">Manage your course catalogue</p>
+    </div>
+    <p-button label="Add Course" icon="pi pi-plus" routerLink="/courses/new" />
+  </header>
+
+  <p-card>
+    <app-page-state
+      [loading]="loading()"
+      [error]="error()"
+      [empty]="isEmpty()"
+      emptyMessage="No Courses Found"
+      (retry)="loadCourses()"
+    >
+      <p-table
+        #dt
+        [value]="courses()"
+        dataKey="id"
+        [paginator]="true"
+        [rows]="10"
+        [rowsPerPageOptions]="[5, 10, 20]"
+        [showCurrentPageReport]="true"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} courses"
+        sortMode="single"
+        [tableStyle]="{ 'min-width': '60rem' }"
+        styleClass="p-datatable-striped p-datatable-gridlines"
+      >
+        <ng-template #caption>
+          <div class="course-list__toolbar">
+            <p-iconfield class="course-list__search">
+              <p-inputicon styleClass="pi pi-search" />
+              <input
+                pInputText
+                type="text"
+                [ngModel]="searchTerm()"
+                (input)="onSearch($any($event.target).value, dt)"
+                placeholder="Search by course name"
+              />
+            </p-iconfield>
+
+            <p-select
+              class="course-list__filter"
+              [options]="statusFilterOptions"
+              optionLabel="label"
+              optionValue="value"
+              [ngModel]="selectedStatus()"
+              (onChange)="onStatusChange($event.value, dt)"
+              placeholder="Filter by status"
+            />
+
+            <p-button
+              label="Clear"
+              icon="pi pi-filter-slash"
+              severity="secondary"
+              [outlined]="true"
+              (onClick)="clearFilters(dt)"
+            />
+          </div>
+        </ng-template>
+
+        <ng-template #header>
+          <tr>
+            <th pSortableColumn="id" style="width: 5rem">ID <p-sortIcon field="id" /></th>
+            <th pSortableColumn="courseName">Course Name <p-sortIcon field="courseName" /></th>
+            <th pSortableColumn="instructorName">
+              Instructor <p-sortIcon field="instructorName" />
+            </th>
+            <th pSortableColumn="category">Category <p-sortIcon field="category" /></th>
+            <th pSortableColumn="duration">Duration <p-sortIcon field="duration" /></th>
+            <th pSortableColumn="price">Price <p-sortIcon field="price" /></th>
+            <th pSortableColumn="status">Status <p-sortIcon field="status" /></th>
+            <th pSortableColumn="createdDate">Created <p-sortIcon field="createdDate" /></th>
+            <th style="width: 10rem" class="text-center">Actions</th>
+          </tr>
+        </ng-template>
+
+        <ng-template #body let-course>
+          <tr>
+            <td>{{ course.id }}</td>
+            <td class="course-list__name">{{ course.courseName }}</td>
+            <td>{{ course.instructorName }}</td>
+            <td>{{ course.category }}</td>
+            <td>{{ course.duration }} hrs</td>
+            <td>{{ course.price | currency: 'USD' : 'symbol' : '1.0-0' }}</td>
+            <td><app-status-tag [status]="course.status" /></td>
+            <td>{{ course.createdDate | date: 'mediumDate' }}</td>
+            <td>
+              <div class="course-list__actions">
+                <p-button
+                  icon="pi pi-eye"
+                  severity="info"
+                  [text]="true"
+                  [rounded]="true"
+                  [routerLink]="['/courses', course.id]"
+                  pTooltip="View"
+                  tooltipPosition="top"
+                  ariaLabel="View course"
+                />
+                <p-button
+                  icon="pi pi-pencil"
+                  severity="secondary"
+                  [text]="true"
+                  [rounded]="true"
+                  [routerLink]="['/courses', 'edit', course.id]"
+                  pTooltip="Edit"
+                  tooltipPosition="top"
+                  ariaLabel="Edit course"
+                />
+                <p-button
+                  icon="pi pi-trash"
+                  severity="danger"
+                  [text]="true"
+                  [rounded]="true"
+                  (onClick)="confirmDelete(course)"
+                  pTooltip="Delete"
+                  tooltipPosition="top"
+                  ariaLabel="Delete course"
+                />
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+
+        <ng-template #emptymessage>
+          <tr>
+            <td colspan="9" class="course-list__no-match">No courses match your search.</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </app-page-state>
+  </p-card>
+</section>

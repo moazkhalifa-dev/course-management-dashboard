@@ -1,0 +1,39 @@
+<section class="course-form-page">
+  <header class="course-form-page__header">
+    <div class="course-form-page__heading">
+      <h1 class="course-form-page__title">{{ title() }}</h1>
+      <p class="course-form-page__subtitle">
+        {{
+          isEditMode()
+            ? 'Update the course details below.'
+            : 'Fill in the details to create a new course.'
+        }}
+      </p>
+    </div>
+    <p-button
+      label="Back to Courses"
+      icon="pi pi-arrow-left"
+      severity="secondary"
+      [outlined]="true"
+      (onClick)="onCancel()"
+    />
+  </header>
+
+  <p-card>
+    <app-page-state
+      [loading]="loading()"
+      [error]="error()"
+      [empty]="notFound()"
+      [emptyMessage]="emptyMessage()"
+      (retry)="retry()"
+    >
+      <app-course-form
+        [course]="course()"
+        [submitting]="submitting()"
+        [submitLabel]="submitLabel()"
+        (save)="onSave($event)"
+        (formCancel)="onCancel()"
+      />
+    </app-page-state>
+  </p-card>
+</section>

@@ -1,0 +1,196 @@
+<form class="course-form" [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+  <div class="course-form__grid">
+    <!-- Course Name -->
+    <div class="course-form__field course-form__field--full">
+      <label for="courseName">Course Name <span class="course-form__required">*</span></label>
+      <input
+        pInputText
+        id="courseName"
+        formControlName="courseName"
+        placeholder="e.g. Angular Fundamentals"
+        [ngClass]="{ 'ng-invalid ng-dirty': showError('courseName') }"
+        autocomplete="off"
+      />
+      @if (showError('courseName')) {
+        @if (form.controls.courseName.errors?.['required']) {
+          <p-message
+            severity="error"
+            variant="simple"
+            size="small"
+            text="Course name is required."
+          />
+        } @else if (form.controls.courseName.errors?.['minlength']) {
+          <p-message
+            severity="error"
+            variant="simple"
+            size="small"
+            [text]="'Course name must be at least ' + nameMinLength + ' characters.'"
+          />
+        }
+      }
+    </div>
+
+    <!-- Instructor Name -->
+    <div class="course-form__field">
+      <label for="instructorName"
+        >Instructor Name <span class="course-form__required">*</span></label
+      >
+      <input
+        pInputText
+        id="instructorName"
+        formControlName="instructorName"
+        placeholder="e.g. Ahmed Ali"
+        [ngClass]="{ 'ng-invalid ng-dirty': showError('instructorName') }"
+        autocomplete="off"
+      />
+      @if (showError('instructorName') && form.controls.instructorName.errors?.['required']) {
+        <p-message
+          severity="error"
+          variant="simple"
+          size="small"
+          text="Instructor name is required."
+        />
+      }
+    </div>
+
+    <!-- Category -->
+    <div class="course-form__field">
+      <label for="category">Category <span class="course-form__required">*</span></label>
+      <p-select
+        inputId="category"
+        formControlName="category"
+        [options]="categoryOptions"
+        optionLabel="label"
+        optionValue="value"
+        placeholder="Select a category"
+        styleClass="w-full"
+        [class.ng-invalid]="showError('category')"
+        [class.ng-dirty]="showError('category')"
+      />
+      @if (showError('category') && form.controls.category.errors?.['required']) {
+        <p-message severity="error" variant="simple" size="small" text="Category is required." />
+      }
+    </div>
+
+    <!-- Duration -->
+    <div class="course-form__field">
+      <label for="duration">Duration (hours) <span class="course-form__required">*</span></label>
+      <p-inputnumber
+        inputId="duration"
+        formControlName="duration"
+        [min]="1"
+        [showButtons]="true"
+        placeholder="e.g. 20"
+        styleClass="w-full"
+        [class.ng-invalid]="showError('duration')"
+        [class.ng-dirty]="showError('duration')"
+      />
+      @if (showError('duration')) {
+        @if (form.controls.duration.errors?.['required']) {
+          <p-message severity="error" variant="simple" size="small" text="Duration is required." />
+        } @else if (form.controls.duration.errors?.['min']) {
+          <p-message
+            severity="error"
+            variant="simple"
+            size="small"
+            text="Duration must be greater than 0."
+          />
+        }
+      }
+    </div>
+
+    <!-- Price -->
+    <div class="course-form__field">
+      <label for="price">Price (USD) <span class="course-form__required">*</span></label>
+      <p-inputnumber
+        inputId="price"
+        formControlName="price"
+        mode="currency"
+        currency="USD"
+        [min]="0"
+        placeholder="e.g. 1500"
+        styleClass="w-full"
+        [class.ng-invalid]="showError('price')"
+        [class.ng-dirty]="showError('price')"
+      />
+      @if (showError('price')) {
+        @if (form.controls.price.errors?.['required']) {
+          <p-message severity="error" variant="simple" size="small" text="Price is required." />
+        } @else if (form.controls.price.errors?.['min']) {
+          <p-message
+            severity="error"
+            variant="simple"
+            size="small"
+            text="Price cannot be negative."
+          />
+        }
+      }
+    </div>
+
+    <!-- Status -->
+    <div class="course-form__field">
+      <label for="status">Status <span class="course-form__required">*</span></label>
+      <p-select
+        inputId="status"
+        formControlName="status"
+        [options]="statusOptions"
+        optionLabel="label"
+        optionValue="value"
+        placeholder="Select a status"
+        styleClass="w-full"
+        [class.ng-invalid]="showError('status')"
+        [class.ng-dirty]="showError('status')"
+      />
+      @if (showError('status') && form.controls.status.errors?.['required']) {
+        <p-message severity="error" variant="simple" size="small" text="Status is required." />
+      }
+    </div>
+
+    <!-- Description -->
+    <div class="course-form__field course-form__field--full">
+      <label for="description">Description</label>
+      <textarea
+        pTextarea
+        id="description"
+        formControlName="description"
+        rows="4"
+        [maxlength]="descriptionMaxLength"
+        placeholder="Optional course description"
+        [ngClass]="{ 'ng-invalid ng-dirty': showError('description') }"
+      ></textarea>
+      <div class="course-form__hint">
+        <span>
+          @if (showError('description') && form.controls.description.errors?.['maxlength']) {
+            <p-message
+              severity="error"
+              variant="simple"
+              size="small"
+              [text]="'Description cannot exceed ' + descriptionMaxLength + ' characters.'"
+            />
+          }
+        </span>
+        <span class="course-form__counter">
+          {{ form.controls.description.value.length }} / {{ descriptionMaxLength }}
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="course-form__actions">
+    <p-button
+      type="button"
+      label="Cancel"
+      icon="pi pi-times"
+      severity="secondary"
+      [outlined]="true"
+      (onClick)="formCancel.emit()"
+    />
+    <p-button
+      type="submit"
+      [label]="submitLabel()"
+      icon="pi pi-check"
+      [loading]="submitting()"
+      [disabled]="form.invalid || submitting()"
+    />
+  </div>
+</form>

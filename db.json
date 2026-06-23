@@ -1,0 +1,137 @@
+{
+  "courses": [
+    {
+      "id": "1",
+      "courseName": "Angular Fundamentals",
+      "instructorName": "Ahmed Ali",
+      "category": "Frontend",
+      "duration": 20,
+      "price": 1500,
+      "status": "Active",
+      "description": "A hands-on introduction to Angular: components, templates, data binding and the standalone APIs.",
+      "createdDate": "2026-01-12"
+    },
+    {
+      "id": "2",
+      "courseName": "Advanced RxJS Patterns",
+      "instructorName": "Sara Mahmoud",
+      "category": "Frontend",
+      "duration": 14,
+      "price": 1800,
+      "status": "Active",
+      "description": "Master observables, higher-order operators, subjects and reactive state management.",
+      "createdDate": "2026-02-03"
+    },
+    {
+      "id": "3",
+      "courseName": "Node.js REST APIs",
+      "instructorName": "Omar Khaled",
+      "category": "Backend",
+      "duration": 25,
+      "price": 2000,
+      "status": "Active",
+      "description": "Build scalable REST APIs with Node.js and Express, including auth and validation.",
+      "createdDate": "2026-01-28"
+    },
+    {
+      "id": "4",
+      "courseName": "Database Design Essentials",
+      "instructorName": "Laila Hassan",
+      "category": "Backend",
+      "duration": 18,
+      "price": 1600,
+      "status": "Draft",
+      "description": "Relational modeling, normalization, indexing and writing efficient queries.",
+      "createdDate": "2026-03-09"
+    },
+    {
+      "id": "5",
+      "courseName": "UI/UX Design Principles",
+      "instructorName": "Mariam Adel",
+      "category": "Design",
+      "duration": 12,
+      "price": 1200,
+      "status": "Active",
+      "description": "Core principles of usability, layout, color and accessibility for modern interfaces.",
+      "createdDate": "2026-02-20"
+    },
+    {
+      "id": "6",
+      "courseName": "Figma for Developers",
+      "instructorName": "Youssef Nabil",
+      "category": "Design",
+      "duration": 8,
+      "price": 900,
+      "status": "Draft",
+      "description": "Translate designs into components and collaborate effectively with design teams.",
+      "createdDate": "2026-03-15"
+    },
+    {
+      "id": "7",
+      "courseName": "TypeScript Deep Dive",
+      "instructorName": "Hana Tarek",
+      "category": "Frontend",
+      "duration": 16,
+      "price": 1400,
+      "status": "Active",
+      "description": "Generics, advanced types, decorators and strict typing strategies for large apps.",
+      "createdDate": "2026-01-05"
+    },
+    {
+      "id": "8",
+      "courseName": "Microservices with Docker",
+      "instructorName": "Karim Fouad",
+      "category": "Backend",
+      "duration": 30,
+      "price": 2500,
+      "status": "Archived",
+      "description": "Containerize services, orchestrate with Docker Compose and design for scale.",
+      "createdDate": "2025-11-18"
+    },
+    {
+      "id": "9",
+      "courseName": "Design Systems at Scale",
+      "instructorName": "Nour Samir",
+      "category": "Design",
+      "duration": 10,
+      "price": 1100,
+      "status": "Archived",
+      "description": "Build and maintain a consistent design system across multiple products and teams.",
+      "createdDate": "2025-12-02"
+    },
+    {
+      "id": "10",
+      "courseName": "GraphQL APIs in Practice",
+      "instructorName": "Tamer Wael",
+      "category": "Backend",
+      "duration": 22,
+      "price": 1900,
+      "status": "Draft",
+      "description": "Schemas, resolvers, queries, mutations and integrating GraphQL with a frontend.",
+      "createdDate": "2026-03-22"
+    },
+    {
+      "courseName": "node.js",
+      "instructorName": "mazin",
+      "category": "Backend",
+      "duration": 12,
+      "price": 1300,
+      "status": "Active",
+      "description": "",
+      "createdDate": "2026-06-23",
+      "id": "11"
+    },
+    {
+      "courseName": "angular",
+      "instructorName": "moaz",
+      "category": "Frontend",
+      "duration": 10,
+      "price": 1100,
+      "status": "Active",
+      "description": "",
+      "createdDate": "2026-06-23",
+      "id": "12"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

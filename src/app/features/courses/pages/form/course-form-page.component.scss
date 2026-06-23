@@ -1,0 +1,39 @@
+.course-form-page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.course-form-page__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.course-form-page__heading {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.course-form-page__title {
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
+.course-form-page__subtitle {
+  margin: 0;
+  color: var(--p-text-muted-color);
+}
+
+@media (max-width: 640px) {
+  .course-form-page {
+    padding: 1rem;
+  }
+}
