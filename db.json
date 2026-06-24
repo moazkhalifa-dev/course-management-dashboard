@@ -131,6 +131,28 @@
       "description": "",
       "createdDate": "2026-06-23",
       "id": "12"
+    },
+    {
+      "courseName": "java",
+      "instructorName": "hamdy",
+      "category": "Backend",
+      "duration": 10,
+      "price": 1200,
+      "status": "Active",
+      "description": "",
+      "createdDate": "2026-06-24",
+      "id": "13"
+    },
+    {
+      "courseName": "reactjs",
+      "instructorName": "hamdy",
+      "category": "Backend",
+      "duration": 20,
+      "price": 2000,
+      "status": "Active",
+      "description": "test description",
+      "createdDate": "2026-06-24",
+      "id": "14"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

@@ -25,6 +25,8 @@
         [showCurrentPageReport]="true"
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} courses"
         sortMode="single"
+        [customSort]="true"
+        (sortFunction)="customSort($event)"
         [tableStyle]="{ 'min-width': '60rem' }"
         styleClass="p-datatable-striped p-datatable-gridlines"
       >

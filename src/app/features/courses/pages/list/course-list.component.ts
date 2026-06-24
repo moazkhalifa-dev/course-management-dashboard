@@ -2,7 +2,7 @@ import { CurrencyPipe, DatePipe } from '@angular/common';
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { ConfirmationService, MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService, SortEvent } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { IconFieldModule } from 'primeng/iconfield';
@@ -67,6 +67,38 @@ export class CourseListComponent implements OnInit {
   /** (Re)loads the course list; also used by the error-state retry button. */
   loadCourses(): void {
     this.courseService.loadCourses();
+  }
+
+  /**
+   * Type-aware sort for p-table. `id` is stored as a string but is logically
+   * numeric, so the default lexicographic sort produces 1, 10, 11, 2, ...
+   * Here we compare ids numerically, strings with locale-aware compare, and
+   * fall back to a generic comparison for numbers/dates.
+   */
+  customSort(event: SortEvent): void {
+    const field = event.field;
+    const order = event.order ?? 1;
+
+    event.data?.sort((a, b) => {
+      const valueA = a[field as keyof Course];
+      const valueB = b[field as keyof Course];
+
+      let result: number;
+
+      if (field === 'id') {
+        result = Number(valueA) - Number(valueB);
+      } else if (valueA == null) {
+        result = valueB == null ? 0 : -1;
+      } else if (valueB == null) {
+        result = 1;
+      } else if (typeof valueA === 'string' && typeof valueB === 'string') {
+        result = valueA.localeCompare(valueB);
+      } else {
+        result = valueA < valueB ? -1 : valueA > valueB ? 1 : 0;
+      }
+
+      return order * result;
+    });
   }
 
   /** Filters the table by course name as the user types. */
