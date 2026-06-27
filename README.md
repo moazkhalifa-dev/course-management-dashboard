@@ -2,7 +2,9 @@
 
 A single-page **Course Management Dashboard** built with **Angular 20** and **PrimeNG**. It lets users browse, search, filter, sort, create, edit, view, and delete courses, backed by a **JSON Server** mock REST API. The project demonstrates clean Angular architecture, reactive forms, services, full CRUD, and robust UI state handling (loading / empty / error).
 
- **Live Demo:** [course-management-dashboard-one.vercel.app/courses](https://course-management-dashboard-one.vercel.app/courses)
+**Live Demo:** [course-management-dashboard-one.vercel.app/courses](https://course-management-dashboard-one.vercel.app/courses)
+
+> The live demo uses browser LocalStorage for persistence, while local development uses JSON Server via `npm run mock-api`.
 
 ---
 
@@ -202,6 +204,7 @@ The application uses a lightweight mock REST API powered by JSON Server.
 - Course description is optional and limited to 500 characters.
 - The Angular application runs on port 4200.
 - The mock API runs on port 3000.
+- The live demo uses browser LocalStorage because Vercel hosts the frontend only; local development uses JSON Server.
 
 ---
 
